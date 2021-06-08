@@ -77,12 +77,6 @@ class ArtButton:
             dst=self.active_artwork_file_path
         )
 
-    def _is_false_negative_click(self):
-        """Check if false negative click by timeout"""
-        time.sleep(0.1)
-        input_state = GPIO.input(self.GPIO_pinout)
-        return input_state
-
     def start(self) -> None:
         """Starts infinate loop listening to button click. When clicked, it changes the active artwork."""
         while True:
