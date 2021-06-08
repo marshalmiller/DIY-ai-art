@@ -48,18 +48,18 @@ class ArtEventHandler(FileSystemEventHandler):
 
         # GENERATE YOUR IMAGES HERE
         # For example:
-        # config = tf.ConfigProto(allow_soft_placement=True)
-        # with tf.Session(config=config) as sess:
-        #     gan = StyleGAN(
-        #         sess=sess,
-        #         batch_size=self.batch_size,
-        #         img_size=self.img_size,
-        #         checkpoint_directory=self.checkpoint_directory,
-        #         image_directory=self.image_directory)
-        #
-        #     gan.generate_images(
-        #         num_images=self.test_num
-        #     )
+        config = tf.ConfigProto(allow_soft_placement=True)
+        with tf.Session(config=config) as sess:
+             gan = StyleGAN(
+                 sess=sess,
+                 batch_size=self.batch_size,
+                 img_size=self.img_size,
+                 checkpoint_directory=self.checkpoint_directory,
+                 image_directory=self.image_directory)
+        
+             gan.generate_images(
+                 num_images=self.test_num
+             )
 
         generating_images.value = False
 
