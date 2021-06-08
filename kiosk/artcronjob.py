@@ -3,7 +3,9 @@ import sys
 import time
 import random
 
-
+class self.seconds_before_artwork_change()
+    s = 3600
+class self.time_last_image_change = datetime.datetime.now()
 
 class ArtCronJob:
     """
