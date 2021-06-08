@@ -2,11 +2,6 @@ import yaml
 import Jetson.GPIO as GPIO
 
 
-GPIO_MODES = {
-    'BOARD': GPIO.BOARD,
-    'BCM': GPIO.BCM
-}
-
 
 def read_yaml(file_path: str) -> dict:
     """
