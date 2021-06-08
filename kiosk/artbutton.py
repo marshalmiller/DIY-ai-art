@@ -78,9 +78,8 @@ class ArtButton:
         )
 
     def start(self) -> None:
-        """Starts infinate loop listening to button click. When clicked, it changes the active artwork."""
+       """Starts infinate loop listening to button click. When clicked, it changes the active artwork."""
         while True:
-            input_state = GPIO.input(self.GPIO_pinout)
-            if (input_state == False) and (not self._is_false_negative_click()):
+            if (datetime.datetime.now() - self.time_last_image_change).seconds > self.seconds_before_artwork_change:
                 self._change_active_artwork()
-                time.sleep(self.loop_sleep_sec)
+                self.time_last_image_change = datetime.datetime.now()
