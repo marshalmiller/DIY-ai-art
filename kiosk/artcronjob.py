@@ -2,23 +2,14 @@ import os
 import sys
 import time
 import random
-import Jetson.GPIO as GPIO
-from kiosk.utils import GPIO_MODES
 
 
-class ArtButton:
+
+class ArtCronJob:
     """
-    Listens to GPIO connected button. When clicked, the currently active artwork displayed in the Kiosk is
-    replaced with a randomly sampled image from the image directory. The sampled image is removed from the
-    image directory.
 
     Parameters
     ----------
-    GPIO_mode : str
-        GPIO mode used to set up the Nvidia Jetson board. Accepted values: {'BOARD', 'BCM'}
-
-    GPIO_pinout : int
-        GPIO pin number to which the button is connected.
 
     active_artwork_file_path : str
         Path to the active artwork file. This is the image that will be displayed in the Kiosk.
@@ -31,16 +22,11 @@ class ArtButton:
         if set to low.
     """
     def __init__(self,
-                 GPIO_mode: str,
-                 GPIO_pinout: int,
                  active_artwork_file_path: str,
                  image_directory: str,
                  loop_sleep_sec: float = 1.0) -> None:
         try:
-            mode = GPIO_MODES[GPIO_mode]
-            GPIO.setmode(mode)
-            GPIO.setup(GPIO_pinout, GPIO.IN)
-            self.GPIO_pinout = GPIO_pinout
+
         except Exception as e:
             print(e.message)
             sys.exit(1)
