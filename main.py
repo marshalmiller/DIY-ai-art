@@ -2,15 +2,13 @@ import time
 import multiprocessing
 from kiosk.kiosk import Kiosk
 from kiosk.utils import read_yaml
-from kiosk.artbutton import ArtButton
+from kiosk.artbutton import ArtCronJob
 from watchdog.observers import Observer
 from kiosk.art_event_handler import ArtEventHandler
 from kiosk.pir_sensor_screensaver import PIRSensorScreensaver
 
 
-def start_artbutton(GPIO_mode: str,
-                    GPIO_pinout: int,
-                    active_artwork_file_path: str,
+def start_artbutton(active_artwork_file_path: str,
                     image_directory: str,
                     loop_sleep_sec: float) -> None:
     """
@@ -18,12 +16,6 @@ def start_artbutton(GPIO_mode: str,
 
     Parameters
     ----------
-    GPIO_mode : str
-        GPIO mode used to set up the Nvidia Jetson board. Accepted values: {'BOARD', 'BCM'}
-
-    GPIO_pinout : int
-        GPIO pin number to which the button is connected.
-
     active_artwork_file_path : str
         Path to the active artwork file. This is the image that will be displayed in the Kiosk.
 
@@ -38,9 +30,7 @@ def start_artbutton(GPIO_mode: str,
     -------
     None
     """
-    button = ArtButton(
-        GPIO_mode=GPIO_mode,
-        GPIO_pinout=GPIO_pinout,
+    button = ArtCronJob(
         active_artwork_file_path=active_artwork_file_path,
         image_directory=image_directory,
         loop_sleep_sec=loop_sleep_sec
@@ -76,20 +66,13 @@ def start_kiosk(active_artwork_file_path: str,
     kiosk.start()
 
 
-def start_pir(GPIO_mode: str,
-              GPIO_pinout: int,
-              loop_sleep_sec: float,
+def start_pir(loop_sleep_sec: float,
               screensaver_after_sec: float) -> None:
     """
     Starts passive infrared sensor listener.
 
     Parameters
     ----------
-    GPIO_mode : str
-        GPIO mode used to set up the Nvidia Jetson board. Accepted values: {'BOARD', 'BCM'}
-
-    GPIO_pinout : int
-        GPIO pin number to which the PIR sensor is connected.
 
     loop_sleep_sec : float
         Seconds to sleep when reading PIR sensor and checking screensaver.
@@ -102,8 +85,6 @@ def start_pir(GPIO_mode: str,
     None
     """
     pir = PIRSensorScreensaver(
-        GPIO_mode=GPIO_mode,
-        GPIO_pinout=GPIO_pinout,
         loop_sleep_sec=loop_sleep_sec,
         screensaver_after_sec=screensaver_after_sec
     )
