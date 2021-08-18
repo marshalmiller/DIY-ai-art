@@ -2,7 +2,7 @@ import time
 import multiprocessing
 from kiosk.kiosk import Kiosk
 from kiosk.utils import read_yaml
-from kiosk.artbutton import ArtCronJob
+from kiosk.artcronjob import ArtCronJob
 from watchdog.observers import Observer
 from kiosk.art_event_handler import ArtEventHandler
 from kiosk.pir_sensor_screensaver import PIRSensorScreensaver
