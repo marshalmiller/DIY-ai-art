@@ -187,6 +187,8 @@ class Kiosk:
         self.panel.pack()
 
     def start(self) -> None:
-        """Start GUI"""
-        self._setup_image_on_start()
-        self.tk.mainloop()        
+        """Starts infinate loop listening to button click. When clicked, it changes the active artwork."""
+        while True:
+            if (datetime.datetime.now() - self.time_last_image_change).seconds > self.seconds_before_artwork_change:
+                self._change_active_artwork()
+                self.time_last_image_change = datetime.datetime.now()      
