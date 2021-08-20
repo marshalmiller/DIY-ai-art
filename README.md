@@ -172,33 +172,6 @@ Install python wheel:
 pip3 install wheel
 ```
 
-## Install Jetson GPIO
-[Jetson.GPIO](https://github.com/NVIDIA/jetson-gpio) is a Python package developed by Nvidia that works in the same way
-as RPi.GPIO, but for the Jetson family of computers. It enables the user to, through Python code, interact with the GPIO 
-pinouts on the Jetson computer.
-
-First, install the Jetson.GPIO package into the virtual environment:
-
-```bash
-pip3 install Jetson.GPIO
-```
-
-Then, set up user permissions to be able to access the GPIOs. Create a new GPIO user group (replace 
-`your_user_name`):
-
-```bash
-sudo groupadd -f -r gpio
-sudo usermod -a -G gpio your_user_name
-```
-
-Copy custom GPIO rules (replace `pythonNN` with your Python version):
-
-```bash
-sudo cp venvs/artkiosk/lib/pythonNN/site-packages/Jetson/GPIO/99-gpio.rules /etc/udev/rules.d/
-```
-
-Full installation guide can be found here: [https://github.com/NVIDIA/jetson-gpio#installation](https://github.com/NVIDIA/jetson-gpio#installation)
-
 ## Install xscreensaver (optional)
 To reduce the risk of burn-in when displaying static art on the screen, a PIR (passive infrared) sensor was integrated. 
 When no movement has been registered around the art installation, a screen saver was triggered.
